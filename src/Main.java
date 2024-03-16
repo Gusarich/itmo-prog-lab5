@@ -2,13 +2,13 @@ import classes.Commands.*;
 import classes.Coordinates;
 import classes.Executer;
 import classes.IOManagers.CommandLineIO;
+import classes.IOManagers.FileIO;
 import classes.Location;
 import classes.Person;
 import enums.Color;
 import enums.Country;
 import interfaces.ICommand;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -20,10 +20,10 @@ public class Main {
     private static String filename;
 
     public static void loadPersonsFromFile() {
-        File file = new File(filename);
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
+        try {
+            FileIO fileIO = new FileIO(filename);
+            while (fileIO.hasNextLine()) {
+                String line = fileIO.readLine();
                 String[] fields = line.split(",");
                 int key = Integer.parseInt(fields[0]);
                 String name = fields[1];

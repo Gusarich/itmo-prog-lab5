@@ -1,15 +1,11 @@
 package classes.Commands;
 
+import classes.IOManagers.FileIO;
 import classes.Person;
 import interfaces.ICommand;
 import interfaces.IInputOutput;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -29,18 +25,17 @@ public class SaveCommand implements ICommand {
     public void execute(IInputOutput io) {
         io.println("Enter the filename:");
         String filename = io.readLine();
-
-        try (OutputStream os = new FileOutputStream(filename);
-             BufferedOutputStream bos = new BufferedOutputStream(os);
-             PrintWriter writer = new PrintWriter(new OutputStreamWriter(bos))) {
-
-            for (Person person : persons.values()) {
-                writer.println(person.toCSV());
-            }
-
-            io.println("The collection has been saved to " + filename + ".");
-        } catch (IOException e) {
+        FileIO fileIO = null;
+        try {
+            fileIO = new FileIO(filename);
+        } catch (FileNotFoundException e) {
             io.println("Error writing to file: " + filename);
         }
+
+        for (Person person : persons.values()) {
+            fileIO.println(person.toCSV());
+        }
+
+        io.println("The collection has been saved to " + filename + ".");
     }
 }
