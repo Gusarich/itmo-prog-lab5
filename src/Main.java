@@ -1,5 +1,6 @@
 import classes.Commands.*;
 import classes.Coordinates;
+import classes.Executer;
 import classes.IOManagers.CommandLineIO;
 import classes.Location;
 import classes.Person;
@@ -63,7 +64,7 @@ public class Main {
         commands.put("remove_key", new RemoveKeyCommand(persons));
         commands.put("clear", new ClearCommand(persons));
         commands.put("save", new SaveCommand(persons));
-        // commands.put("execute_script", new ExecuteScriptCommand(persons, commands)
+        commands.put("execute_script", new ExecuteScriptCommand(persons, commands));
         commands.put("exit", new ExitCommand());
         commands.put("remove_greater", new RemoveGreaterCommand(persons));
         commands.put("replace_if_greater", new ReplaceIfGreaterCommand(persons));
@@ -74,16 +75,13 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         CommandLineIO io = new CommandLineIO(scanner);
+
+        Executer executer = new Executer(persons, commands, io);
+
         while (true) {
             System.out.print("> ");
             String commandName = scanner.nextLine();
-
-            ICommand command = commands.get(commandName);
-            if (command != null) {
-                command.execute(io);
-            } else {
-                System.out.println("Unknown command. Use 'help' to get more information.");
-            }
+            executer.executeCommand(commandName);
         }
     }
 }
