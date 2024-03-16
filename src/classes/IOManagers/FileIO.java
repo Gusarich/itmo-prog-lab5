@@ -1,5 +1,6 @@
 package classes.IOManagers;
 
+import enums.FileIOMode;
 import interfaces.IInputOutput;
 
 import java.io.*;
@@ -8,14 +9,17 @@ import java.util.Scanner;
 public class FileIO implements IInputOutput {
     private Scanner scanner;
     private PrintWriter writer;
-    private String filename;
+    private FileIOMode mode;
 
-    public FileIO(String filename) throws FileNotFoundException {
-        this.filename = filename;
-        this.scanner = new Scanner(new File(filename));
-        OutputStream os = new FileOutputStream(filename);
-        BufferedOutputStream bos = new BufferedOutputStream(os);
-        this.writer = new PrintWriter(new OutputStreamWriter(bos));
+    public FileIO(String filename, FileIOMode mode) throws FileNotFoundException {
+        if (mode == FileIOMode.READ || mode == FileIOMode.READ_WRITE) {
+            this.scanner = new Scanner(new File(filename));
+        }
+        if (mode == FileIOMode.WRITE || mode == FileIOMode.READ_WRITE) {
+            OutputStream os = new FileOutputStream(filename);
+            BufferedOutputStream bos = new BufferedOutputStream(os);
+            this.writer = new PrintWriter(new OutputStreamWriter(bos));
+        }
     }
 
     @Override

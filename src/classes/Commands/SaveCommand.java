@@ -2,6 +2,7 @@ package classes.Commands;
 
 import classes.IOManagers.FileIO;
 import classes.Person;
+import enums.FileIOMode;
 import interfaces.ICommand;
 import interfaces.IInputOutput;
 
@@ -27,9 +28,10 @@ public class SaveCommand implements ICommand {
         String filename = io.readLine();
         FileIO fileIO = null;
         try {
-            fileIO = new FileIO(filename);
+            fileIO = new FileIO(filename, FileIOMode.WRITE);
         } catch (FileNotFoundException e) {
             io.println("Error writing to file: " + filename);
+            return;
         }
 
         for (Person person : persons.values()) {

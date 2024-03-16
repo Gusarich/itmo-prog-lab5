@@ -21,7 +21,7 @@ public class Main {
 
     public static void loadPersonsFromFile() {
         try {
-            FileIO fileIO = new FileIO(filename);
+            FileIO fileIO = new FileIO(filename, enums.FileIOMode.READ);
             while (fileIO.hasNextLine()) {
                 String line = fileIO.readLine();
                 String[] fields = line.split(",");
