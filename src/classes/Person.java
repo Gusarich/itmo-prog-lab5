@@ -31,10 +31,94 @@ public class Person implements Comparable<Person> {
 
     // Getters and setters
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Color getEyeColor() {
+        return eyeColor;
+    }
+
+    public Color getHairColor() {
+        return hairColor;
+    }
+
+    public Country getNationality() {
+        return nationality;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
     @Override
     public int compareTo(Person other) {
         return Integer.compare(this.id, other.id);
     }
 
-    // toString, hashCode, equals methods
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", coordinates=" + coordinates +
+                ", creationDate=" + creationDate +
+                ", height=" + height +
+                ", eyeColor=" + eyeColor +
+                ", hairColor=" + hairColor +
+                ", nationality=" + nationality +
+                ", location=" + location +
+                "}";
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        result = 31 * result + id;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + coordinates.hashCode();
+        result = 31 * result + creationDate.hashCode();
+        result = 31 * result + height;
+        result = 31 * result + eyeColor.hashCode();
+        result = 31 * result + hairColor.hashCode();
+        result = 31 * result + nationality.hashCode();
+        result = 31 * result + location.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Person other = (Person) obj;
+        return id == other.id &&
+                name.equals(other.name) &&
+                coordinates.equals(other.coordinates) &&
+                creationDate.equals(other.creationDate) &&
+                height == other.height &&
+                eyeColor == other.eyeColor &&
+                hairColor == other.hairColor &&
+                nationality == other.nationality &&
+                location.equals(other.location);
+    }
 }
