@@ -20,8 +20,9 @@ public class ShowCommand implements interfaces.ICommand {
     @Override
     public void execute(Scanner scanner) {
         System.out.println("Collection:");
-        for (Person person : persons.values()) {
+        persons.forEach((key, person) -> {
+            System.out.print(key + " => ");
             System.out.println(person);
-        }
+        });
     }
 }

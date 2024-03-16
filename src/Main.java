@@ -23,15 +23,16 @@ public class Main {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] fields = line.split(",");
-                String name = fields[0];
-                Coordinates coordinates = new Coordinates(Integer.parseInt(fields[1]), Integer.parseInt(fields[2]));
-                int height = Integer.parseInt(fields[3]);
-                Color eyeColor = Color.valueOf(fields[4].toUpperCase());
-                Color hairColor = Color.valueOf(fields[5].toUpperCase());
-                Country nationality = Country.valueOf(fields[6].toUpperCase());
-                Location location = new Location(Float.parseFloat(fields[7]), Float.parseFloat(fields[8]), fields[9]);
+                int key = Integer.parseInt(fields[0]);
+                String name = fields[1];
+                Coordinates coordinates = new Coordinates(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]));
+                int height = Integer.parseInt(fields[4]);
+                Color eyeColor = Color.valueOf(fields[5].toUpperCase());
+                Color hairColor = Color.valueOf(fields[6].toUpperCase());
+                Country nationality = Country.valueOf(fields[7].toUpperCase());
+                Location location = new Location(Float.parseFloat(fields[8]), Float.parseFloat(fields[9]), fields[10]);
                 Person person = new Person(name, coordinates, height, eyeColor, hairColor, nationality, location);
-                persons.put(person.getId(), person);
+                persons.put(key, person);
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + filename);

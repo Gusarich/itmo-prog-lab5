@@ -21,6 +21,7 @@ public class InsertCommand implements interfaces.ICommand {
     public void execute(Scanner scanner) {
         System.out.println("Enter the key:");
         int key = scanner.nextInt();
+        scanner.nextLine();
 
         Person person = Person.fromInput(scanner);
 

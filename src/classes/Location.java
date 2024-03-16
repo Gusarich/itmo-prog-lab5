@@ -28,8 +28,10 @@ public class Location {
     public static Location fromInput(Scanner scanner) {
         System.out.println("Enter x:");
         Float x = scanner.nextFloat();
+        scanner.nextLine();
         System.out.println("Enter y:");
         float y = scanner.nextFloat();
+        scanner.nextLine();
         System.out.println("Enter name:");
         String name = scanner.nextLine();
         return new Location(x, y, name);

@@ -127,11 +127,12 @@ public class Person implements Comparable<Person> {
         System.out.println("Enter name:");
         String name = scanner.nextLine();
 
-        System.out.println("Enter coordinates:");
+        System.out.println("Coordinates...");
         Coordinates coordinates = Coordinates.fromInput(scanner);
 
         System.out.println("Enter height:");
         int height = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.println("Enter eye color:");
         Color eyeColor = Color.valueOf(scanner.nextLine().toUpperCase());
@@ -142,7 +143,7 @@ public class Person implements Comparable<Person> {
         System.out.println("Enter nationality:");
         Country nationality = Country.valueOf(scanner.nextLine().toUpperCase());
 
-        System.out.println("Enter location:");
+        System.out.println("Location...");
         Location location = Location.fromInput(scanner);
 
         return new Person(name, coordinates, height, eyeColor, hairColor, nationality, location);

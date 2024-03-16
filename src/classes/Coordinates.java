@@ -22,8 +22,10 @@ public class Coordinates {
     public static Coordinates fromInput(Scanner scanner) {
         System.out.println("Enter x:");
         float x = scanner.nextFloat();
+        scanner.nextLine();
         System.out.println("Enter y:");
         float y = scanner.nextFloat();
+        scanner.nextLine();
         return new Coordinates(x, y);
     }
 
