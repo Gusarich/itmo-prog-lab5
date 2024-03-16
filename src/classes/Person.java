@@ -4,6 +4,7 @@ import enums.Color;
 import enums.Country;
 
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class Person implements Comparable<Person> {
     private static int nextId = 1;
@@ -120,5 +121,30 @@ public class Person implements Comparable<Person> {
                 hairColor == other.hairColor &&
                 nationality == other.nationality &&
                 location.equals(other.location);
+    }
+
+    public static Person fromInput(Scanner scanner) {
+        System.out.println("Enter name:");
+        String name = scanner.nextLine();
+
+        System.out.println("Enter coordinates:");
+        Coordinates coordinates = Coordinates.fromInput(scanner);
+
+        System.out.println("Enter height:");
+        int height = scanner.nextInt();
+
+        System.out.println("Enter eye color:");
+        Color eyeColor = Color.valueOf(scanner.nextLine().toUpperCase());
+
+        System.out.println("Enter hair color:");
+        Color hairColor = Color.valueOf(scanner.nextLine().toUpperCase());
+
+        System.out.println("Enter nationality:");
+        Country nationality = Country.valueOf(scanner.nextLine().toUpperCase());
+
+        System.out.println("Enter location:");
+        Location location = Location.fromInput(scanner);
+
+        return new Person(name, coordinates, height, eyeColor, hairColor, nationality, location);
     }
 }

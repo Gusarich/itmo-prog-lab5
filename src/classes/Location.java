@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.Scanner;
+
 public class Location {
     private Float x;
     private float y;
@@ -9,6 +11,16 @@ public class Location {
         this.x = x;
         this.y = y;
         this.name = name;
+    }
+
+    public static Location fromInput(Scanner scanner) {
+        System.out.println("Enter x:");
+        Float x = scanner.nextFloat();
+        System.out.println("Enter y:");
+        float y = scanner.nextFloat();
+        System.out.println("Enter name:");
+        String name = scanner.nextLine();
+        return new Location(x, y, name);
     }
 
     // Getters and setters

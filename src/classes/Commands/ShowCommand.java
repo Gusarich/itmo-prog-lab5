@@ -14,7 +14,7 @@ public class ShowCommand implements interfaces.ICommand {
 
     @Override
     public void printHelp() {
-        System.out.println("Shows all elements of the collection");
+        System.out.println("Show all elements of the collection");
     }
 
     @Override
