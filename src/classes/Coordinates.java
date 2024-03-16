@@ -19,5 +19,11 @@ public class Coordinates {
         return new Coordinates(x, y);
     }
 
-    // Getters and setters
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

@@ -23,5 +23,12 @@ public class Location {
         return new Location(x, y, name);
     }
 
-    // Getters and setters
+    @Override
+    public String toString() {
+        return "Location{" +
+                "x=" + x +
+                ", y=" + y +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

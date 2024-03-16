@@ -78,13 +78,13 @@ public class Person implements Comparable<Person> {
         return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
+                ", coordinates=" + coordinates.toString() +
                 ", creationDate=" + creationDate +
                 ", height=" + height +
                 ", eyeColor=" + eyeColor +
                 ", hairColor=" + hairColor +
                 ", nationality=" + nationality +
-                ", location=" + location +
+                ", location=" + location.toString() +
                 "}";
     }
 
