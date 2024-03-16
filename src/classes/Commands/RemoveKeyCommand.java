@@ -2,6 +2,7 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
+import interfaces.IInputOutput;
 
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -14,20 +15,20 @@ public class RemoveKeyCommand implements ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Remove an element from the collection by its key");
+    public String getHelp() {
+        return "Remove an element from the collection by its key";
     }
 
     @Override
-    public void execute(Scanner scanner) {
-        System.out.println("Enter the key:");
-        int key = scanner.nextInt();
+    public void execute(IInputOutput io) {
+        io.println("Enter the key:");
+        int key = Integer.parseInt(io.readLine());
 
         if (persons.containsKey(key)) {
             persons.remove(key);
-            System.out.println("Element removed.");
+            io.println("Element removed.");
         } else {
-            System.out.println("Element with this key does not exist.");
+            io.println("Element with this key does not exist.");
         }
     }
 }

@@ -1,12 +1,14 @@
 package classes.Commands;
 
+import interfaces.IInputOutput;
+
 public class ExitCommand implements interfaces.ICommand {
-    public void printHelp() {
-        System.out.println("Exit the program");
+    public String getHelp() {
+        return "Exit the program";
     }
 
-    public void execute(java.util.Scanner scanner) {
-        System.out.println("Exiting...");
+    public void execute(IInputOutput io) {
+        io.println("Exiting...");
         System.exit(0);
     }
 }

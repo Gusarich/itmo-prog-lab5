@@ -3,6 +3,7 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
+import interfaces.IInputOutput;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -17,17 +18,17 @@ public class GroupCountingByNameCommand implements ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Group collection elements by the value of the name field, print the number of elements in each group");
+    public String getHelp() {
+        return "Group collection elements by the value of the name field, print the number of elements in each group";
     }
 
     @Override
-    public void execute(Scanner scanner) {
+    public void execute(IInputOutput io) {
         Map<String, Long> groups = persons.values().stream()
                 .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));
 
         for (Map.Entry<String, Long> entry : groups.entrySet()) {
-            System.out.println("Name: " + entry.getKey() + ", Count: " + entry.getValue());
+            io.println("Name: " + entry.getKey() + ", Count: " + entry.getValue());
         }
     }
 }

@@ -2,6 +2,7 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
+import interfaces.IInputOutput;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -20,14 +21,14 @@ public class SaveCommand implements ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Save the collection to a file");
+    public String getHelp() {
+        return "Save the collection to a file";
     }
 
     @Override
-    public void execute(Scanner scanner) {
-        System.out.println("Enter the filename:");
-        String filename = scanner.nextLine();
+    public void execute(IInputOutput io) {
+        io.println("Enter the filename:");
+        String filename = io.readLine();
 
         try (OutputStream os = new FileOutputStream(filename);
              BufferedOutputStream bos = new BufferedOutputStream(os);
@@ -37,9 +38,9 @@ public class SaveCommand implements ICommand {
                 writer.println(person.toCSV());
             }
 
-            System.out.println("The collection has been saved to " + filename + ".");
+            io.println("The collection has been saved to " + filename + ".");
         } catch (IOException e) {
-            System.out.println("Error writing to file: " + filename);
+            io.println("Error writing to file: " + filename);
         }
     }
 }

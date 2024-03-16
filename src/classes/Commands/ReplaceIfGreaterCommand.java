@@ -3,6 +3,7 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
+import interfaces.IInputOutput;
 
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -15,27 +16,27 @@ public class ReplaceIfGreaterCommand implements ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Replace the value by key if the new value is greater than the old one");
+    public String getHelp() {
+        return "Replace the value by key if the new value is greater than the old one";
     }
 
     @Override
-    public void execute(Scanner scanner) {
-        System.out.println("Enter the key:");
-        int key = scanner.nextInt();
+    public void execute(IInputOutput io) {
+        io.println("Enter the key:");
+        int key = Integer.parseInt(io.readLine());
 
         if (persons.containsKey(key)) {
-            System.out.println("Enter the element:");
-            Person element = Person.fromInput(scanner);
+            io.println("Enter the element:");
+            Person element = Person.fromInput(io);
 
             if (element.compareTo(persons.get(key)) > 0) {
                 persons.put(key, element);
-                System.out.println("Element replaced.");
+                io.println("Element replaced.");
             } else {
-                System.out.println("The new element is not greater than the old one.");
+                io.println("The new element is not greater than the old one.");
             }
         } else {
-            System.out.println("Element with this key does not exist.");
+            io.println("Element with this key does not exist.");
         }
     }
 }

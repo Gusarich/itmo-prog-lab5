@@ -1,5 +1,7 @@
 package classes;
 
+import interfaces.IInputOutput;
+
 import java.util.Scanner;
 
 public class Coordinates {
@@ -19,13 +21,11 @@ public class Coordinates {
         return y;
     }
 
-    public static Coordinates fromInput(Scanner scanner) {
+    public static Coordinates fromInput(IInputOutput io) {
         System.out.println("Enter x:");
-        float x = scanner.nextFloat();
-        scanner.nextLine();
+        float x = Float.parseFloat(io.readLine());
         System.out.println("Enter y:");
-        float y = scanner.nextFloat();
-        scanner.nextLine();
+        float y = Float.parseFloat(io.readLine());
         return new Coordinates(x, y);
     }
 

@@ -6,6 +6,6 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 public interface ICommand {
-    void printHelp();
-    void execute(Scanner scanner);
+    String getHelp();
+    void execute(IInputOutput io);
 }

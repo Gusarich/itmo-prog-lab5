@@ -1,5 +1,6 @@
 import classes.Commands.*;
 import classes.Coordinates;
+import classes.IOManagers.CommandLineIO;
 import classes.Location;
 import classes.Person;
 import enums.Color;
@@ -72,13 +73,14 @@ public class Main {
         commands.put("print_ascending", new PrintAscendingCommand(persons));
 
         Scanner scanner = new Scanner(System.in);
+        CommandLineIO io = new CommandLineIO(scanner);
         while (true) {
             System.out.print("> ");
             String commandName = scanner.nextLine();
 
             ICommand command = commands.get(commandName);
             if (command != null) {
-                command.execute(scanner);
+                command.execute(io);
             } else {
                 System.out.println("Unknown command. Use 'help' to get more information.");
             }

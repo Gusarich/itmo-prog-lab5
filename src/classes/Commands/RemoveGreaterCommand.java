@@ -2,6 +2,7 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
+import interfaces.IInputOutput;
 
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -16,14 +17,14 @@ public class RemoveGreaterCommand implements ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Remove all elements from the collection that exceed the specified one");
+    public String getHelp() {
+        return "Remove all elements from the collection that exceed the specified one";
     }
 
     @Override
-    public void execute(Scanner scanner) {
-        System.out.println("Enter the element:");
-        Person element = Person.fromInput(scanner);
+    public void execute(IInputOutput io) {
+        io.println("Enter the element:");
+        Person element = Person.fromInput(io);
 
         Iterator<Map.Entry<Integer, Person>> iterator = persons.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -32,6 +33,6 @@ public class RemoveGreaterCommand implements ICommand {
                 iterator.remove();
             }
         }
-        System.out.println("Elements greater than the specified one have been removed.");
+        io.println("Elements greater than the specified one have been removed.");
     }
 }

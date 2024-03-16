@@ -2,6 +2,7 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
+import interfaces.IInputOutput;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -19,14 +20,14 @@ public class InfoCommand implements ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Display information about the collection");
+    public String getHelp() {
+        return "Display information about the collection";
     }
 
     @Override
-    public void execute(Scanner scanner) {
-        System.out.println("Number of elements: " + persons.size());
-        System.out.println("Number of commands: " + commands.size());
-        System.out.println("Filename: " + filename);
+    public void execute(IInputOutput io) {
+        io.println("Number of elements: " + persons.size());
+        io.println("Number of commands: " + commands.size());
+        io.println("Filename: " + filename);
     }
 }

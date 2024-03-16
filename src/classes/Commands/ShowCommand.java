@@ -1,6 +1,7 @@
 package classes.Commands;
 
 import classes.Person;
+import interfaces.IInputOutput;
 
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -13,16 +14,16 @@ public class ShowCommand implements interfaces.ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Show all elements of the collection");
+    public String getHelp() {
+        return "Show all elements of the collection";
     }
 
     @Override
-    public void execute(Scanner scanner) {
-        System.out.println("Collection:");
+    public void execute(IInputOutput io) {
+        io.println("Collection:");
         persons.forEach((key, person) -> {
-            System.out.print(key + " => ");
-            System.out.println(person);
+            io.print(key + " => ");
+            io.println(person.toString());
         });
     }
 }

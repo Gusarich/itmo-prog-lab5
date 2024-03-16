@@ -1,7 +1,9 @@
 package classes.Commands;
 
 import interfaces.ICommand;
+import interfaces.IInputOutput;
 
+import javax.imageio.stream.IIOByteBuffer;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -13,15 +15,14 @@ public class HelpCommand implements ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Display help information");
+    public String getHelp() {
+        return "Display help information";
     }
 
     @Override
-    public void execute(Scanner scanner) {
+    public void execute(IInputOutput io) {
         commands.forEach((name, command) -> {
-            System.out.print(name + " - ");
-            command.printHelp();
+            io.println(name + " - " + command.getHelp());
         });
     }
 }

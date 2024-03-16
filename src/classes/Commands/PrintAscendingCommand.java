@@ -3,6 +3,7 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
+import interfaces.IInputOutput;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -17,17 +18,17 @@ public class PrintAscendingCommand implements ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Print collection elements in ascending order");
+    public String getHelp() {
+        return "Print collection elements in ascending order";
     }
 
     @Override
-    public void execute(Scanner scanner) {
+    public void execute(IInputOutput io) {
         List<Person> sortedPersons = new ArrayList<>(persons.values());
         sortedPersons.sort(Person::compareTo);
 
         for (Person person : sortedPersons) {
-            System.out.println(person);
+            io.println(person.toString());
         }
     }
 }

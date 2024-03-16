@@ -1,6 +1,7 @@
 package classes.Commands;
 
 import classes.Person;
+import interfaces.IInputOutput;
 
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -13,19 +14,18 @@ public class InsertCommand implements interfaces.ICommand {
     }
 
     @Override
-    public void printHelp() {
-        System.out.println("Add a new element with the specified key");
+    public String getHelp() {
+        return "Add a new element with the specified key";
     }
 
     @Override
-    public void execute(Scanner scanner) {
-        System.out.println("Enter the key:");
-        int key = scanner.nextInt();
-        scanner.nextLine();
+    public void execute(IInputOutput io) {
+        io.println("Enter the key:");
+        int key = Integer.parseInt(io.readLine());
 
-        Person person = Person.fromInput(scanner);
+        Person person = Person.fromInput(io);
 
         persons.put(key, person);
-        System.out.println("Element added.");
+        io.println("Element added.");
     }
 }
