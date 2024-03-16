@@ -13,6 +13,18 @@ public class Location {
         this.name = name;
     }
 
+    public Float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public static Location fromInput(Scanner scanner) {
         System.out.println("Enter x:");
         Float x = scanner.nextFloat();

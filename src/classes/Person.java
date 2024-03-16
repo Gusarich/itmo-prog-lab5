@@ -147,4 +147,17 @@ public class Person implements Comparable<Person> {
 
         return new Person(name, coordinates, height, eyeColor, hairColor, nationality, location);
     }
+
+    public String toCSV() {
+        return name + "," +
+                coordinates.getX() + "," +
+                coordinates.getY() + "," +
+                height + "," +
+                eyeColor + "," +
+                hairColor + "," +
+                nationality + "," +
+                location.getX() + "," +
+                location.getY() + "," +
+                location.getName();
+    }
 }

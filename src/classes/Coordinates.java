@@ -11,6 +11,14 @@ public class Coordinates {
         this.y = y;
     }
 
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
     public static Coordinates fromInput(Scanner scanner) {
         System.out.println("Enter x:");
         float x = scanner.nextFloat();

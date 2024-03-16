@@ -15,8 +15,9 @@ import java.util.Scanner;
 public class Main {
     private static Hashtable<Integer, Person> persons = new Hashtable<>();
     private static HashMap<String, ICommand> commands = new HashMap<>();
+    private static String filename;
 
-    public static void loadPersonsFromFile(String filename) {
+    public static void loadPersonsFromFile() {
         File file = new File(filename);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
@@ -44,8 +45,8 @@ public class Main {
     public static void main(String[] args) {
         // Load data from file if command line argument is provided
         if (args.length > 0) {
-            String filename = args[0];
-            loadPersonsFromFile(filename);
+            filename = args[0];
+            loadPersonsFromFile();
             System.out.println("Loaded " + persons.size() + " persons from " + filename);
         } else {
             System.out.println("No file provided. Use command line argument to load data from file.");
@@ -53,12 +54,14 @@ public class Main {
 
         // Initialize commands
         commands.put("help", new HelpCommand(commands));
-        commands.put("info", new InfoCommand(persons));
+        commands.put("info", new InfoCommand(persons, commands, filename));
         commands.put("show", new ShowCommand(persons));
         commands.put("insert", new InsertCommand(persons));
         commands.put("update", new UpdateCommand(persons));
         commands.put("remove_key", new RemoveKeyCommand(persons));
         commands.put("clear", new ClearCommand(persons));
+        commands.put("save", new SaveCommand(persons));
+        // commands.put("execute_script", new ExecuteScriptCommand(persons, commands)
         commands.put("exit", new ExitCommand());
         commands.put("remove_greater", new RemoveGreaterCommand(persons));
         commands.put("replace_if_greater", new ReplaceIfGreaterCommand(persons));
@@ -70,7 +73,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("> ");
-            String commandName = scanner.next();
+            String commandName = scanner.nextLine();
 
             ICommand command = commands.get(commandName);
             if (command != null) {
