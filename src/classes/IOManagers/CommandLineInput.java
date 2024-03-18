@@ -14,8 +14,4 @@ public class CommandLineInput implements interfaces.IInput {
         return scanner.nextLine();
     }
 
-    @Override
-    public String readNext() {
-        return scanner.next();
-    }
 }

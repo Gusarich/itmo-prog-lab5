@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FileInput implements IInput {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public FileInput(String filename) throws FileNotFoundException {
         this.scanner = new Scanner(new File(filename));
@@ -16,11 +16,6 @@ public class FileInput implements IInput {
     @Override
     public String readLine() {
         return scanner.nextLine();
-    }
-
-    @Override
-    public String readNext() {
-        return scanner.next();
     }
 
     public boolean hasNextLine() {

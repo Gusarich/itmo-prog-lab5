@@ -20,8 +20,6 @@ public class HelpCommand implements ICommand {
 
     @Override
     public void execute(IInput input, IOutput output) {
-        commands.forEach((name, command) -> {
-            output.println(name + " - " + command.getHelp());
-        });
+        commands.forEach((name, command) -> output.println(name + " - " + command.getHelp()));
     }
 }

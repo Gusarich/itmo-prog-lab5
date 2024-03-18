@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Set;
 
-public class Executer {
+public class Executor {
     Hashtable<Integer, Person> persons;
     HashMap<String, ICommand> commands;
     IInput input;
     IOutput output;
     Set<String> usedScripts;
 
-    public Executer(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, IInput input, IOutput output, Set<String> usedScripts) {
+    public Executor(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, IInput input, IOutput output, Set<String> usedScripts) {
         this.persons = persons;
         this.commands = commands;
         this.input = input;

@@ -1,6 +1,6 @@
 package classes.Commands;
 
-import classes.Executer;
+import classes.Executor;
 import classes.IOManagers.FileInput;
 import classes.Person;
 import interfaces.ICommand;
@@ -39,10 +39,10 @@ public class ExecuteScriptCommand implements ICommand {
         try {
             FileInput fileInput = new FileInput(filename);
             usedScripts.add(filename);
-            Executer executer = new Executer(persons, commands, fileInput, output, usedScripts);
+            Executor executor = new Executor(persons, commands, fileInput, output, usedScripts);
             while (fileInput.hasNextLine()) {
                 String commandName = fileInput.readLine();
-                executer.executeCommand(commandName);
+                executor.executeCommand(commandName);
             }
             usedScripts.remove(filename);
         } catch (FileNotFoundException e) {

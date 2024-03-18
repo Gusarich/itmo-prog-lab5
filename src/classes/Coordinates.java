@@ -3,24 +3,7 @@ package classes;
 import interfaces.IInput;
 import interfaces.IOutput;
 
-import java.util.Scanner;
-
-public class Coordinates {
-    private float x;
-    private float y;
-
-    public Coordinates(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
-    }
+public record Coordinates(float x, float y) {
 
     public static Coordinates fromInput(IInput input, IOutput output) {
         output.println("Enter x:");

@@ -1,6 +1,6 @@
 import classes.Commands.*;
 import classes.Coordinates;
-import classes.Executer;
+import classes.Executor;
 import classes.IOManagers.CommandLineInput;
 import classes.IOManagers.CommandLineOutput;
 import classes.IOManagers.FileInput;
@@ -15,8 +15,8 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Main {
-    private static Hashtable<Integer, Person> persons = new Hashtable<>();
-    private static HashMap<String, ICommand> commands = new HashMap<>();
+    private static final Hashtable<Integer, Person> persons = new Hashtable<>();
+    private static final HashMap<String, ICommand> commands = new HashMap<>();
     private static String filename;
 
     public static void loadPersonsFromFile(IOutput output) {
@@ -58,7 +58,7 @@ public class Main {
             System.out.println("No file provided. Use command line argument to load data from file.");
         }
 
-        Set<String> usedScripts = new HashSet<String>();
+        Set<String> usedScripts = new HashSet<>();
 
         // Initialize commands
         commands.put("help", new HelpCommand(commands));
@@ -78,12 +78,12 @@ public class Main {
         commands.put("group_counting_by_name", new GroupCountingByNameCommand(persons));
         commands.put("print_ascending", new PrintAscendingCommand(persons));
 
-        Executer executer = new Executer(persons, commands, input, output, usedScripts);
+        Executor executor = new Executor(persons, commands, input, output, usedScripts);
 
         while (true) {
             output.print("> ");
             String commandName = input.readLine();
-            executer.executeCommand(commandName);
+            executor.executeCommand(commandName);
         }
     }
 }

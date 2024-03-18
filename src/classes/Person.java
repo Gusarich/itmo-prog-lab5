@@ -9,15 +9,15 @@ import java.time.LocalDateTime;
 
 public class Person implements Comparable<Person> {
     private static int nextId = 1;
-    private int id;
-    private String name;
-    private Coordinates coordinates;
-    private LocalDateTime creationDate;
-    private int height;
-    private Color eyeColor;
-    private Color hairColor;
-    private Country nationality;
-    private Location location;
+    private final int id;
+    private final String name;
+    private final Coordinates coordinates;
+    private final LocalDateTime creationDate;
+    private final int height;
+    private final Color eyeColor;
+    private final Color hairColor;
+    private final Country nationality;
+    private final Location location;
 
     public Person(String name, Coordinates coordinates, int height, Color eyeColor, Color hairColor, Country nationality, Location location) {
         this.id = nextId++;
@@ -31,42 +31,12 @@ public class Person implements Comparable<Person> {
         this.location = location;
     }
 
-    // Getters and setters
-
-    public int getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
     public int getHeight() {
         return height;
-    }
-
-    public Color getEyeColor() {
-        return eyeColor;
-    }
-
-    public Color getHairColor() {
-        return hairColor;
-    }
-
-    public Country getNationality() {
-        return nationality;
-    }
-
-    public Location getLocation() {
-        return location;
     }
 
     @Override
@@ -151,14 +121,14 @@ public class Person implements Comparable<Person> {
 
     public String toCSV() {
         return name + "," +
-                coordinates.getX() + "," +
-                coordinates.getY() + "," +
+                coordinates.x() + "," +
+                coordinates.y() + "," +
                 height + "," +
                 eyeColor + "," +
                 hairColor + "," +
                 nationality + "," +
-                location.getX() + "," +
-                location.getY() + "," +
-                location.getName();
+                location.x() + "," +
+                location.y() + "," +
+                location.name();
     }
 }

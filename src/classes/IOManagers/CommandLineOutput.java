@@ -1,7 +1,5 @@
 package classes.IOManagers;
 
-import java.util.Scanner;
-
 public class CommandLineOutput implements interfaces.IOutput {
     public CommandLineOutput() {
     }
