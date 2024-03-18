@@ -2,12 +2,13 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Hashtable;
 
 public class UpdateCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public UpdateCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -19,16 +20,16 @@ public class UpdateCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
-        io.println("Enter the id:");
-        int id = Integer.parseInt(io.readLine());
+    public void execute(IInput input, IOutput output) {
+        output.println("Enter the id:");
+        int id = Integer.parseInt(input.readLine());
 
         if (persons.containsKey(id)) {
-            Person person = Person.fromInput(io);
+            Person person = Person.fromInput(input, output);
             persons.put(id, person);
-            io.println("Element updated.");
+            output.println("Element updated.");
         } else {
-            io.println("Element with this id does not exist.");
+            output.println("Element with this id does not exist.");
         }
     }
 }

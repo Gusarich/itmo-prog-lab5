@@ -2,16 +2,16 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Scanner;
 
 public class InfoCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
-    private HashMap<String, ICommand> commands;
-    private String filename;
+    private final Hashtable<Integer, Person> persons;
+    private final HashMap<String, ICommand> commands;
+    private final String filename;
 
     public InfoCommand(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, String filename) {
         this.persons = persons;
@@ -25,9 +25,9 @@ public class InfoCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
-        io.println("Number of elements: " + persons.size());
-        io.println("Number of commands: " + commands.size());
-        io.println("Filename: " + filename);
+    public void execute(IInput input, IOutput output) {
+        output.println("Number of elements: " + persons.size());
+        output.println("Number of commands: " + commands.size());
+        output.println("Filename: " + filename);
     }
 }

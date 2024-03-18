@@ -1,13 +1,13 @@
 package classes.Commands;
 
 import classes.Person;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Hashtable;
-import java.util.Scanner;
 
 public class ShowCommand implements interfaces.ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public ShowCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -19,11 +19,11 @@ public class ShowCommand implements interfaces.ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
-        io.println("Collection:");
+    public void execute(IInput input, IOutput output) {
+        output.println("Collection:");
         persons.forEach((key, person) -> {
-            io.print(key + " => ");
-            io.println(person.toString());
+            output.print(key + " => ");
+            output.println(person.toString());
         });
     }
 }

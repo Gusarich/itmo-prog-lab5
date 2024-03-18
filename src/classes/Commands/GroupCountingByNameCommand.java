@@ -3,15 +3,15 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class GroupCountingByNameCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public GroupCountingByNameCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -23,12 +23,12 @@ public class GroupCountingByNameCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
+    public void execute(IInput input, IOutput output) {
         Map<String, Long> groups = persons.values().stream()
                 .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));
 
         for (Map.Entry<String, Long> entry : groups.entrySet()) {
-            io.println("Name: " + entry.getKey() + ", Count: " + entry.getValue());
+            output.println("Name: " + entry.getKey() + ", Count: " + entry.getValue());
         }
     }
 }

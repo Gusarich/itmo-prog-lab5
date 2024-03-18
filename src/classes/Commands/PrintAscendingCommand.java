@@ -3,15 +3,15 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Scanner;
 
 public class PrintAscendingCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public PrintAscendingCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -23,12 +23,12 @@ public class PrintAscendingCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
+    public void execute(IInput input, IOutput output) {
         List<Person> sortedPersons = new ArrayList<>(persons.values());
         sortedPersons.sort(Person::compareTo);
 
         for (Person person : sortedPersons) {
-            io.println(person.toString());
+            output.println(person.toString());
         }
     }
 }

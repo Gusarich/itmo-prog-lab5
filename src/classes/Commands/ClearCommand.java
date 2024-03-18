@@ -2,13 +2,13 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Hashtable;
-import java.util.Scanner;
 
 public class ClearCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public ClearCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -20,8 +20,8 @@ public class ClearCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
+    public void execute(IInput input, IOutput output) {
         persons.clear();
-        io.println("Collection cleared.");
+        output.println("Collection cleared.");
     }
 }

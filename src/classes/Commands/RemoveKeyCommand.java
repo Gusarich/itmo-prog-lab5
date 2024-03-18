@@ -2,13 +2,13 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Hashtable;
-import java.util.Scanner;
 
 public class RemoveKeyCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public RemoveKeyCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -20,15 +20,15 @@ public class RemoveKeyCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
-        io.println("Enter the key:");
-        int key = Integer.parseInt(io.readLine());
+    public void execute(IInput input, IOutput output) {
+        output.println("Enter the key:");
+        int key = Integer.parseInt(input.readLine());
 
         if (persons.containsKey(key)) {
             persons.remove(key);
-            io.println("Element removed.");
+            output.println("Element removed.");
         } else {
-            io.println("Element with this key does not exist.");
+            output.println("Element with this key does not exist.");
         }
     }
 }

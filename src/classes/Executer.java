@@ -1,27 +1,34 @@
 package classes;
 
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
+
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Set;
 
 public class Executer {
     Hashtable<Integer, Person> persons;
     HashMap<String, ICommand> commands;
-    IInputOutput io;
+    IInput input;
+    IOutput output;
+    Set<String> usedScripts;
 
-    public Executer(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, IInputOutput io) {
+    public Executer(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, IInput input, IOutput output, Set<String> usedScripts) {
         this.persons = persons;
         this.commands = commands;
-        this.io = io;
+        this.input = input;
+        this.output = output;
+        this.usedScripts = usedScripts;
     }
 
     public void executeCommand(String commandName) {
         ICommand command = commands.get(commandName);
         if (command != null) {
-            command.execute(io);
+            command.execute(input, output);
         } else {
-            System.out.println("Unknown command. Use 'help' to get more information.");
+            output.println("Unknown command. Use 'help' to get more information.");
         }
     }
 }

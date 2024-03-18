@@ -3,13 +3,13 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Hashtable;
-import java.util.Scanner;
 
 public class SumOfHeightCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public SumOfHeightCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -21,8 +21,8 @@ public class SumOfHeightCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
+    public void execute(IInput input, IOutput output) {
         int sum = persons.values().stream().mapToInt(Person::getHeight).sum();
-        io.println("The sum of the height field values is " + sum + ".");
+        output.println("The sum of the height field values is " + sum + ".");
     }
 }

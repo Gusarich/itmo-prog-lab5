@@ -3,13 +3,13 @@ package classes.Commands;
 
 import classes.Person;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Hashtable;
-import java.util.Scanner;
 
 public class ReplaceIfGreaterCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public ReplaceIfGreaterCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -21,22 +21,22 @@ public class ReplaceIfGreaterCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
-        io.println("Enter the key:");
-        int key = Integer.parseInt(io.readLine());
+    public void execute(IInput input, IOutput output) {
+        output.println("Enter the key:");
+        int key = Integer.parseInt(input.readLine());
 
         if (persons.containsKey(key)) {
-            io.println("Enter the element:");
-            Person element = Person.fromInput(io);
+            output.println("Enter the element:");
+            Person element = Person.fromInput(input, output);
 
             if (element.compareTo(persons.get(key)) > 0) {
                 persons.put(key, element);
-                io.println("Element replaced.");
+                output.println("Element replaced.");
             } else {
-                io.println("The new element is not greater than the old one.");
+                output.println("The new element is not greater than the old one.");
             }
         } else {
-            io.println("Element with this key does not exist.");
+            output.println("Element with this key does not exist.");
         }
     }
 }

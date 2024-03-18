@@ -1,8 +1,6 @@
 package interfaces;
 
-public interface IInputOutput {
+public interface IOutput {
     void print(String message);
     void println(String message);
-    String readLine();
-    String readNext();
 }

@@ -1,6 +1,7 @@
 package classes;
 
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Scanner;
 
@@ -27,13 +28,13 @@ public class Location {
         return name;
     }
 
-    public static Location fromInput(IInputOutput io) {
-        System.out.println("Enter x:");
-        Float x = Float.parseFloat(io.readLine());
-        System.out.println("Enter y:");
-        float y = Float.parseFloat(io.readLine());
-        System.out.println("Enter name:");
-        String name = io.readLine();
+    public static Location fromInput(IInput input, IOutput output) {
+        output.println("Enter x:");
+        Float x = Float.parseFloat(input.readLine());
+        output.println("Enter y:");
+        float y = Float.parseFloat(input.readLine());
+        output.println("Enter name:");
+        String name = input.readLine();
         return new Location(x, y, name);
     }
 

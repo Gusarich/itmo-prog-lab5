@@ -1,17 +1,16 @@
 package classes.Commands;
 
-import classes.IOManagers.FileIO;
+import classes.IOManagers.FileOutput;
 import classes.Person;
-import enums.FileIOMode;
 import interfaces.ICommand;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.io.*;
 import java.util.Hashtable;
-import java.util.Scanner;
 
 public class SaveCommand implements ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public SaveCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -23,21 +22,20 @@ public class SaveCommand implements ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
-        io.println("Enter the filename:");
-        String filename = io.readLine();
-        FileIO fileIO = null;
+    public void execute(IInput input, IOutput output) {
+        output.println("Enter the filename:");
+        String filename = input.readLine();
         try {
-            fileIO = new FileIO(filename, FileIOMode.WRITE);
+            FileOutput fileOutput = new FileOutput(filename);
+            for (Person person : persons.values()) {
+                fileOutput.println(person.toCSV());
+            }
+            fileOutput.close();
         } catch (FileNotFoundException e) {
-            io.println("Error writing to file: " + filename);
+            output.println("Error writing to file: " + filename);
             return;
         }
 
-        for (Person person : persons.values()) {
-            fileIO.println(person.toCSV());
-        }
-
-        io.println("The collection has been saved to " + filename + ".");
+        output.println("The collection has been saved to " + filename + ".");
     }
 }

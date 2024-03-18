@@ -1,13 +1,13 @@
 package classes.Commands;
 
 import classes.Person;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.util.Hashtable;
-import java.util.Scanner;
 
 public class InsertCommand implements interfaces.ICommand {
-    private Hashtable<Integer, Person> persons;
+    private final Hashtable<Integer, Person> persons;
 
     public InsertCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
@@ -19,13 +19,13 @@ public class InsertCommand implements interfaces.ICommand {
     }
 
     @Override
-    public void execute(IInputOutput io) {
-        io.println("Enter the key:");
-        int key = Integer.parseInt(io.readLine());
+    public void execute(IInput input, IOutput output) {
+        output.println("Enter the key:");
+        int key = Integer.parseInt(input.readLine());
 
-        Person person = Person.fromInput(io);
+        Person person = Person.fromInput(input, output);
 
         persons.put(key, person);
-        io.println("Element added.");
+        output.println("Element added.");
     }
 }

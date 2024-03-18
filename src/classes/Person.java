@@ -2,10 +2,10 @@ package classes;
 
 import enums.Color;
 import enums.Country;
-import interfaces.IInputOutput;
+import interfaces.IInput;
+import interfaces.IOutput;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class Person implements Comparable<Person> {
     private static int nextId = 1;
@@ -124,27 +124,27 @@ public class Person implements Comparable<Person> {
                 location.equals(other.location);
     }
 
-    public static Person fromInput(IInputOutput io) {
-        System.out.println("Enter name:");
-        String name = io.readLine();
+    public static Person fromInput(IInput input, IOutput output) {
+        output.println("Enter name:");
+        String name = input.readLine();
 
-        System.out.println("Coordinates...");
-        Coordinates coordinates = Coordinates.fromInput(io);
+        output.println("Coordinates...");
+        Coordinates coordinates = Coordinates.fromInput(input, output);
 
-        System.out.println("Enter height:");
-        int height = Integer.parseInt(io.readLine());
+        output.println("Enter height:");
+        int height = Integer.parseInt(input.readLine());
 
-        System.out.println("Enter eye color:");
-        Color eyeColor = Color.valueOf(io.readLine().toUpperCase());
+        output.println("Enter eye color:");
+        Color eyeColor = Color.valueOf(input.readLine().toUpperCase());
 
-        System.out.println("Enter hair color:");
-        Color hairColor = Color.valueOf(io.readLine().toUpperCase());
+        output.println("Enter hair color:");
+        Color hairColor = Color.valueOf(input.readLine().toUpperCase());
 
-        System.out.println("Enter nationality:");
-        Country nationality = Country.valueOf(io.readLine().toUpperCase());
+        output.println("Enter nationality:");
+        Country nationality = Country.valueOf(input.readLine().toUpperCase());
 
-        System.out.println("Location...");
-        Location location = Location.fromInput(io);
+        output.println("Location...");
+        Location location = Location.fromInput(input, output);
 
         return new Person(name, coordinates, height, eyeColor, hairColor, nationality, location);
     }

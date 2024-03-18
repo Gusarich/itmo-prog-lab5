@@ -1,27 +1,27 @@
 import classes.Commands.*;
 import classes.Coordinates;
 import classes.Executer;
-import classes.IOManagers.CommandLineIO;
-import classes.IOManagers.FileIO;
+import classes.IOManagers.CommandLineInput;
+import classes.IOManagers.CommandLineOutput;
+import classes.IOManagers.FileInput;
 import classes.Location;
 import classes.Person;
 import enums.Color;
 import enums.Country;
 import interfaces.ICommand;
+import interfaces.IOutput;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     private static Hashtable<Integer, Person> persons = new Hashtable<>();
     private static HashMap<String, ICommand> commands = new HashMap<>();
     private static String filename;
 
-    public static void loadPersonsFromFile() {
+    public static void loadPersonsFromFile(IOutput output) {
         try {
-            FileIO fileIO = new FileIO(filename, enums.FileIOMode.READ);
+            FileInput fileIO = new FileInput(filename);
             while (fileIO.hasNextLine()) {
                 String line = fileIO.readLine();
                 String[] fields = line.split(",");
@@ -37,23 +37,28 @@ public class Main {
                 persons.put(key, person);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filename);
+            output.println("File not found: " + filename);
         } catch (NumberFormatException e) {
-            System.out.println("Error parsing number from file: " + filename);
+            output.println("Error parsing number from file: " + filename);
         } catch (IllegalArgumentException e) {
-            System.out.println("Error parsing enum value from file: " + filename);
+            output.println("Error parsing enum value from file: " + filename);
         }
     }
 
     public static void main(String[] args) {
+        CommandLineInput input = new CommandLineInput();
+        CommandLineOutput output = new CommandLineOutput();
+
         // Load data from file if command line argument is provided
         if (args.length > 0) {
             filename = args[0];
-            loadPersonsFromFile();
+            loadPersonsFromFile(output);
             System.out.println("Loaded " + persons.size() + " persons from " + filename);
         } else {
             System.out.println("No file provided. Use command line argument to load data from file.");
         }
+
+        Set<String> usedScripts = new HashSet<String>();
 
         // Initialize commands
         commands.put("help", new HelpCommand(commands));
@@ -64,7 +69,7 @@ public class Main {
         commands.put("remove_key", new RemoveKeyCommand(persons));
         commands.put("clear", new ClearCommand(persons));
         commands.put("save", new SaveCommand(persons));
-        commands.put("execute_script", new ExecuteScriptCommand(persons, commands));
+        commands.put("execute_script", new ExecuteScriptCommand(persons, commands, usedScripts));
         commands.put("exit", new ExitCommand());
         commands.put("remove_greater", new RemoveGreaterCommand(persons));
         commands.put("replace_if_greater", new ReplaceIfGreaterCommand(persons));
@@ -73,14 +78,11 @@ public class Main {
         commands.put("group_counting_by_name", new GroupCountingByNameCommand(persons));
         commands.put("print_ascending", new PrintAscendingCommand(persons));
 
-        Scanner scanner = new Scanner(System.in);
-        CommandLineIO io = new CommandLineIO(scanner);
-
-        Executer executer = new Executer(persons, commands, io);
+        Executer executer = new Executer(persons, commands, input, output, usedScripts);
 
         while (true) {
-            System.out.print("> ");
-            String commandName = scanner.nextLine();
+            output.print("> ");
+            String commandName = input.readLine();
             executer.executeCommand(commandName);
         }
     }
