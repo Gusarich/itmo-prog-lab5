@@ -53,9 +53,9 @@ public class Main {
         if (args.length > 0) {
             filename = args[0];
             loadPersonsFromFile(output);
-            System.out.println("Loaded " + persons.size() + " persons from " + filename);
+            output.println("Loaded " + persons.size() + " persons from " + filename);
         } else {
-            System.out.println("No file provided. Use command line argument to load data from file.");
+            output.println("No file provided. Use command line argument to load data from file.");
         }
 
         Set<String> usedScripts = new HashSet<>();
