@@ -8,6 +8,10 @@ import interfaces.IOutput;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Represents a person with various attributes.
+ * Each person has a unique ID, a name, coordinates, a creation date, a height, eye color, hair color, nationality, and a location.
+ */
 public class Person implements Comparable<Person> {
     private static int nextId = 1;
     private final int id;
@@ -20,6 +24,17 @@ public class Person implements Comparable<Person> {
     private final Country nationality;
     private final Location location;
 
+    /**
+     * Constructs a new Person with the given attributes.
+     *
+     * @param name the name of the person
+     * @param coordinates the coordinates of the person
+     * @param height the height of the person
+     * @param eyeColor the eye color of the person
+     * @param hairColor the hair color of the person
+     * @param nationality the nationality of the person
+     * @param location the location of the person
+     */
     public Person(String name, Coordinates coordinates, int height, Color eyeColor, Color hairColor, Country nationality, Location location) {
         this.id = nextId++;
         this.name = name;
@@ -32,19 +47,40 @@ public class Person implements Comparable<Person> {
         this.location = location;
     }
 
+    /**
+     * Returns the name of the person.
+     *
+     * @return the name of the person
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the height of the person.
+     *
+     * @return the height of the person
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Compares this person to another person based on their IDs.
+     *
+     * @param other the other person to compare to
+     * @return a negative integer, zero, or a positive integer as this person's ID is less than, equal to, or greater than the other person's ID
+     */
     @Override
     public int compareTo(Person other) {
         return Integer.compare(this.id, other.id);
     }
 
+    /**
+     * Returns a string representation of the person.
+     *
+     * @return a string representation of the person
+     */
     @Override
     public String toString() {
         return "Person{" +
@@ -60,6 +96,11 @@ public class Person implements Comparable<Person> {
                 "}";
     }
 
+    /**
+     * Returns a hash code value for the person.
+     *
+     * @return a hash code value for the person
+     */
     @Override
     public int hashCode() {
         int result = 0;
@@ -75,6 +116,12 @@ public class Person implements Comparable<Person> {
         return result;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param obj the reference object with which to compare
+     * @return true if this object is the same as the obj argument; false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -95,6 +142,13 @@ public class Person implements Comparable<Person> {
                 location.equals(other.location);
     }
 
+    /**
+     * Creates a new Person from user input.
+     *
+     * @param input the input source
+     * @param output the output destination
+     * @return a new Person created from the user input
+     */
     public static Person fromInput(IInput input, IOutput output) {
         output.print("Enter name: ");
         String name = input.readLine();
@@ -121,6 +175,11 @@ public class Person implements Comparable<Person> {
         return new Person(name, coordinates, height, eyeColor, hairColor, nationality, location);
     }
 
+    /**
+     * Returns a CSV representation of the person.
+     *
+     * @return a CSV representation of the person
+     */
     public String toCSV() {
         return name + "," +
                 coordinates.x() + "," +

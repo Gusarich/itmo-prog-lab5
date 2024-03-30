@@ -1,4 +1,3 @@
-// ReplaceIfGreaterCommand.java
 package classes.Commands;
 
 import classes.Person;
@@ -8,18 +7,40 @@ import interfaces.IOutput;
 
 import java.util.Hashtable;
 
+/**
+ * ReplaceIfGreaterCommand class implements the ICommand interface.
+ * It provides methods to get help and execute the command.
+ * The execute method replaces the value by key if the new value is greater than the old one.
+ */
 public class ReplaceIfGreaterCommand implements ICommand {
     private final Hashtable<Integer, Person> persons;
 
+    /**
+     * Constructs a new ReplaceIfGreaterCommand object.
+     *
+     * @param persons the collection of persons in which the replacement is to be made
+     */
     public ReplaceIfGreaterCommand(Hashtable<Integer, Person> persons) {
         this.persons = persons;
     }
 
+    /**
+     * Provides help information for the replace if greater command.
+     *
+     * @return a string containing the help information
+     */
     @Override
     public String getHelp() {
         return "Replace the value by key if the new value is greater than the old one";
     }
 
+    /**
+     * Executes the replace if greater command.
+     * It reads a key and an element from the input, replaces the value by key in the collection if the new value is greater than the old one, and prints a message to the output.
+     *
+     * @param input the input interface
+     * @param output the output interface
+     */
     @Override
     public void execute(IInput input, IOutput output) {
         input.skipLine();

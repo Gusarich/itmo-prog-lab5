@@ -14,11 +14,21 @@ import interfaces.IOutput;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+/**
+ * Main class of the application.
+ * It contains methods to load persons from a file and to initialize and execute commands.
+ */
 public class Main {
     private static final Hashtable<Integer, Person> persons = new Hashtable<>();
     private static final HashMap<String, ICommand> commands = new HashMap<>();
     private static String filename;
 
+    /**
+     * Loads persons from a file.
+     * It reads lines from the file, parses fields from each line, creates a Person object from the fields, and adds the person to the collection.
+     *
+     * @param output the output interface
+     */
     public static void loadPersonsFromFile(IOutput output) {
         try {
             FileInput fileIO = new FileInput(filename);
@@ -45,6 +55,12 @@ public class Main {
         }
     }
 
+    /**
+     * The main method of the application.
+     * It initializes the input and output interfaces, loads persons from a file if a filename is provided as a command line argument, initializes commands, and enters a loop to read and execute commands.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         CommandLineInput input = new CommandLineInput();
         CommandLineOutput output = new CommandLineOutput();
