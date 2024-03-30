@@ -56,6 +56,8 @@ public class ExecuteScriptCommand implements ICommand {
     public void execute(IInput input, IOutput output) {
         String filename = input.readLine();
 
+        output.println("Executing script " + filename);
+
         if (usedScripts.contains(filename)) {
             throw new IllegalArgumentException("Recursion detected in " + filename);
         }

@@ -1,5 +1,5 @@
-info
-show
+execute_script display.scr
+
 insert
 777
 Daniil
