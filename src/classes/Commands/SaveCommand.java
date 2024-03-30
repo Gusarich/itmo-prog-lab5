@@ -45,6 +45,8 @@ public class SaveCommand implements ICommand {
      */
     @Override
     public void execute(IInput input, IOutput output) {
+        input.skipLine();
+
         output.print("Enter the filename: ");
         String filename = input.readLine();
         try {
