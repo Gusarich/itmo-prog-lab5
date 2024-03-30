@@ -20,19 +20,19 @@ import java.util.Set;
 public class ExecuteScriptCommand implements ICommand {
     Hashtable<Integer, Person> persons;
     HashMap<String, ICommand> commands;
-    Set<String> usedScripts;
+    Set<String> runningScripts;
 
     /**
      * Constructs a new ExecuteScriptCommand object.
      *
      * @param persons the collection of persons
      * @param commands the collection of commands
-     * @param usedScripts the set of used scripts
+     * @param runningScripts the set of used scripts
      */
-    public ExecuteScriptCommand(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, Set<String> usedScripts) {
+    public ExecuteScriptCommand(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, Set<String> runningScripts) {
         this.persons = persons;
         this.commands = commands;
-        this.usedScripts = usedScripts;
+        this.runningScripts = runningScripts;
     }
 
     /**
@@ -58,19 +58,19 @@ public class ExecuteScriptCommand implements ICommand {
 
         output.println("Executing script " + filename);
 
-        if (usedScripts.contains(filename)) {
+        if (runningScripts.contains(filename)) {
             throw new IllegalArgumentException("Recursion detected in " + filename);
         }
 
         try {
             FileInput fileInput = new FileInput(filename);
-            usedScripts.add(filename);
-            Executor executor = new Executor(persons, commands, fileInput, output, usedScripts);
+            runningScripts.add(filename);
+            Executor executor = new Executor(persons, commands, fileInput, output, runningScripts);
             while (fileInput.hasNextLine()) {
                 String commandName = fileInput.readNext();
                 executor.executeCommand(commandName);
             }
-            usedScripts.remove(filename);
+            runningScripts.remove(filename);
         } catch (FileNotFoundException e) {
             output.println("Error reading from file: " + filename);
         } catch (Exception e) {

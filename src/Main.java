@@ -74,7 +74,7 @@ public class Main {
             output.println("No file provided. Use command line argument to load data from file.");
         }
 
-        Set<String> usedScripts = new HashSet<>();
+        Set<String> runningScripts = new HashSet<>();
 
         // Initialize commands
         commands.put("help", new HelpCommand(commands));
@@ -85,7 +85,7 @@ public class Main {
         commands.put("remove_key", new RemoveKeyCommand(persons));
         commands.put("clear", new ClearCommand(persons));
         commands.put("save", new SaveCommand(persons));
-        commands.put("execute_script", new ExecuteScriptCommand(persons, commands, usedScripts));
+        commands.put("execute_script", new ExecuteScriptCommand(persons, commands, runningScripts));
         commands.put("exit", new ExitCommand());
         commands.put("remove_greater", new RemoveGreaterCommand(persons));
         commands.put("replace_if_greater", new ReplaceIfGreaterCommand(persons));
@@ -94,7 +94,7 @@ public class Main {
         commands.put("group_counting_by_name", new GroupCountingByNameCommand(persons));
         commands.put("print_ascending", new PrintAscendingCommand(persons));
 
-        Executor executor = new Executor(persons, commands, input, output, usedScripts);
+        Executor executor = new Executor(persons, commands, input, output, runningScripts);
 
         while (true) {
             output.print("> ");

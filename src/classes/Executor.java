@@ -22,7 +22,7 @@ public class Executor {
     // Output interface
     IOutput output;
     // Set storing used scripts
-    Set<String> usedScripts;
+    Set<String> runningScripts;
 
     /**
      * Constructs a new Executor with the given attributes.
@@ -31,14 +31,14 @@ public class Executor {
      * @param commands HashMap of commands
      * @param input Input interface
      * @param output Output interface
-     * @param usedScripts Set of used scripts
+     * @param runningScripts Set of used scripts
      */
-    public Executor(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, IInput input, IOutput output, Set<String> usedScripts) {
+    public Executor(Hashtable<Integer, Person> persons, HashMap<String, ICommand> commands, IInput input, IOutput output, Set<String> runningScripts) {
         this.persons = persons;
         this.commands = commands;
         this.input = input;
         this.output = output;
-        this.usedScripts = usedScripts;
+        this.runningScripts = runningScripts;
     }
 
     /**
