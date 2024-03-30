@@ -158,6 +158,9 @@ public class Person implements Comparable<Person> {
 
         output.print("Enter height: ");
         int height = Integer.parseInt(input.readLine());
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height must be greater than 0");
+        }
 
         output.print("Enter eye color: ");
         String inp = input.readLine();

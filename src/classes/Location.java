@@ -24,6 +24,9 @@ public record Location(Float x, float y, String name) {
         float y = Float.parseFloat(input.readLine());
         output.print("Enter name: ");
         String name = input.readLine();
+        if (name.length() > 847) {
+            throw new IllegalArgumentException("Name must be less than or equal to 847 characters");
+        }
         return new Location(x, y, Objects.equals(name, "") ? null : name);
     }
 

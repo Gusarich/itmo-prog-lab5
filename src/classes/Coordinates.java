@@ -18,8 +18,14 @@ public record Coordinates(float x, float y) {
     public static Coordinates fromInput(IInput input, IOutput output) {
         output.print("Enter x: ");
         float x = Float.parseFloat(input.readLine());
+        if (x > 640) {
+            throw new IllegalArgumentException("X must be less than or equal to 640");
+        }
         output.print("Enter y: ");
         float y = Float.parseFloat(input.readLine());
+        if (y > 545) {
+            throw new IllegalArgumentException("Y must be less than or equal to 545");
+        }
         return new Coordinates(x, y);
     }
 
