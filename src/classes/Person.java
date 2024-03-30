@@ -6,6 +6,7 @@ import interfaces.IInput;
 import interfaces.IOutput;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Person implements Comparable<Person> {
     private static int nextId = 1;
@@ -95,22 +96,23 @@ public class Person implements Comparable<Person> {
     }
 
     public static Person fromInput(IInput input, IOutput output) {
-        output.println("Enter name:");
+        output.print("Enter name: ");
         String name = input.readLine();
 
         output.println("Coordinates...");
         Coordinates coordinates = Coordinates.fromInput(input, output);
 
-        output.println("Enter height:");
+        output.print("Enter height: ");
         int height = Integer.parseInt(input.readLine());
 
-        output.println("Enter eye color:");
-        Color eyeColor = Color.valueOf(input.readLine().toUpperCase());
+        output.print("Enter eye color: ");
+        String inp = input.readLine();
+        Color eyeColor = Objects.equals(inp, "") ? null : Color.valueOf(inp.toUpperCase());
 
-        output.println("Enter hair color:");
+        output.print("Enter hair color: ");
         Color hairColor = Color.valueOf(input.readLine().toUpperCase());
 
-        output.println("Enter nationality:");
+        output.print("Enter nationality: ");
         Country nationality = Country.valueOf(input.readLine().toUpperCase());
 
         output.println("Location...");

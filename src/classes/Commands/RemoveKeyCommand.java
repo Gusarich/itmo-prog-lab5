@@ -21,7 +21,6 @@ public class RemoveKeyCommand implements ICommand {
 
     @Override
     public void execute(IInput input, IOutput output) {
-        output.println("Enter the key:");
         int key = Integer.parseInt(input.readLine());
 
         if (persons.containsKey(key)) {

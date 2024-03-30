@@ -23,7 +23,7 @@ public class SaveCommand implements ICommand {
 
     @Override
     public void execute(IInput input, IOutput output) {
-        output.println("Enter the filename:");
+        output.print("Enter the filename: ");
         String filename = input.readLine();
         try {
             FileOutput fileOutput = new FileOutput(filename);

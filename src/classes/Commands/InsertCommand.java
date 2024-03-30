@@ -20,7 +20,9 @@ public class InsertCommand implements interfaces.ICommand {
 
     @Override
     public void execute(IInput input, IOutput output) {
-        output.println("Enter the key:");
+        input.skipLine();
+
+        output.print("Enter the key: ");
         int key = Integer.parseInt(input.readLine());
 
         Person person = Person.fromInput(input, output);

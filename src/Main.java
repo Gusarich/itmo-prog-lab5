@@ -82,8 +82,12 @@ public class Main {
 
         while (true) {
             output.print("> ");
-            String commandName = input.readLine();
-            executor.executeCommand(commandName);
+            String commandName = input.readNext();
+            try {
+                executor.executeCommand(commandName);
+            } catch (Exception e) {
+                output.println("\nError executing command: " + e.getMessage());
+            }
         }
     }
 }

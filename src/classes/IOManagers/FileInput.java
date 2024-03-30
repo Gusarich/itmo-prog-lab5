@@ -15,7 +15,17 @@ public class FileInput implements IInput {
 
     @Override
     public String readLine() {
-        return scanner.nextLine();
+        return scanner.nextLine().strip();
+    }
+
+    @Override
+    public String readNext() {
+        return scanner.next().strip();
+    }
+
+    @Override
+    public void skipLine() {
+        scanner.nextLine();
     }
 
     public boolean hasNextLine() {

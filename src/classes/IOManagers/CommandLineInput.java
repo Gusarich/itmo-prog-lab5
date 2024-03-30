@@ -11,7 +11,16 @@ public class CommandLineInput implements interfaces.IInput {
 
     @Override
     public String readLine() {
-        return scanner.nextLine();
+        return scanner.nextLine().strip();
     }
 
+    @Override
+    public String readNext() {
+        return scanner.next().strip();
+    }
+
+    @Override
+    public void skipLine() {
+        scanner.nextLine();
+    }
 }

@@ -21,7 +21,9 @@ public class RemoveGreaterCommand implements ICommand {
 
     @Override
     public void execute(IInput input, IOutput output) {
-        output.println("Enter the element:");
+        input.skipLine();
+
+        output.println("Enter the element...");
         Person element = Person.fromInput(input, output);
 
         persons.entrySet().removeIf(entry -> entry.getValue().compareTo(element) > 0);

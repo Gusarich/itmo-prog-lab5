@@ -21,7 +21,9 @@ public class UpdateCommand implements ICommand {
 
     @Override
     public void execute(IInput input, IOutput output) {
-        output.println("Enter the id:");
+        input.skipLine();
+
+        output.print("Enter the id: ");
         int id = Integer.parseInt(input.readLine());
 
         if (persons.containsKey(id)) {

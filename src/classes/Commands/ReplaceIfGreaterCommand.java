@@ -22,11 +22,13 @@ public class ReplaceIfGreaterCommand implements ICommand {
 
     @Override
     public void execute(IInput input, IOutput output) {
-        output.println("Enter the key:");
+        input.skipLine();
+
+        output.print("Enter the key: ");
         int key = Integer.parseInt(input.readLine());
 
         if (persons.containsKey(key)) {
-            output.println("Enter the element:");
+            output.print("Enter the element ");
             Person element = Person.fromInput(input, output);
 
             if (element.compareTo(persons.get(key)) > 0) {

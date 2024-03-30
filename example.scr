@@ -1,4 +1,18 @@
 info
 show
-execute_script
-example.scr
+insert
+777
+Daniil
+123
+321
+184
+
+BLUE
+RUSSIA
+123
+432
+ITMO
+remove_key 20
+show
+execute_script example.scr
+show

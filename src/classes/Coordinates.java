@@ -6,9 +6,9 @@ import interfaces.IOutput;
 public record Coordinates(float x, float y) {
 
     public static Coordinates fromInput(IInput input, IOutput output) {
-        output.println("Enter x:");
+        output.print("Enter x: ");
         float x = Float.parseFloat(input.readLine());
-        output.println("Enter y:");
+        output.print("Enter y: ");
         float y = Float.parseFloat(input.readLine());
         return new Coordinates(x, y);
     }

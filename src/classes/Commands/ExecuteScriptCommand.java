@@ -28,12 +28,10 @@ public class ExecuteScriptCommand implements ICommand {
     }
 
     public void execute(IInput input, IOutput output) {
-        output.println("Enter the filename:");
         String filename = input.readLine();
 
         if (usedScripts.contains(filename)) {
-            output.println("Recursion detected. The script cannot be executed.");
-            return;
+            throw new IllegalArgumentException("Recursion detected in " + filename);
         }
 
         try {
@@ -41,12 +39,15 @@ public class ExecuteScriptCommand implements ICommand {
             usedScripts.add(filename);
             Executor executor = new Executor(persons, commands, fileInput, output, usedScripts);
             while (fileInput.hasNextLine()) {
-                String commandName = fileInput.readLine();
+                String commandName = fileInput.readNext();
                 executor.executeCommand(commandName);
             }
             usedScripts.remove(filename);
         } catch (FileNotFoundException e) {
             output.println("Error reading from file: " + filename);
+        } catch (Exception e) {
+            output.println("Error executing script: " + filename);
+            output.println(e.getMessage());
         }
     }
 }
