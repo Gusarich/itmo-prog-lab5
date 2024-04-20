@@ -34,15 +34,15 @@ public class Main {
             FileInput fileIO = new FileInput(filename);
             while (fileIO.hasNextLine()) {
                 String line = fileIO.readLine();
-                String[] fields = line.split(",");
+                String[] fields = line.split("(?<!\\\\),");
                 int key = Integer.parseInt(fields[0]);
-                String name = fields[1];
+                String name = fields[1].replace("\\,", ",");
                 Coordinates coordinates = new Coordinates(Integer.parseInt(fields[2]), Integer.parseInt(fields[3]));
                 int height = Integer.parseInt(fields[4]);
                 Color eyeColor = Color.valueOf(fields[5].toUpperCase());
                 Color hairColor = Color.valueOf(fields[6].toUpperCase());
                 Country nationality = Country.valueOf(fields[7].toUpperCase());
-                Location location = new Location(Float.parseFloat(fields[8]), Float.parseFloat(fields[9]), fields[10]);
+                Location location = new Location(Float.parseFloat(fields[8]), Float.parseFloat(fields[9]), fields[10].replace("\\,", ","));
                 Person person = new Person(name, coordinates, height, eyeColor, hairColor, nationality, location);
                 persons.put(key, person);
             }

@@ -73,7 +73,7 @@ public class Person implements Comparable<Person> {
      */
     @Override
     public int compareTo(Person other) {
-        return Integer.compare(this.id, other.id);
+        return Integer.compare(this.height, other.height);
     }
 
     /**
@@ -184,7 +184,8 @@ public class Person implements Comparable<Person> {
      * @return a CSV representation of the person
      */
     public String toCSV() {
-        return name + "," +
+        return id + "," +
+                name.replace(",", "\\,") + "," +
                 coordinates.x() + "," +
                 coordinates.y() + "," +
                 height + "," +
@@ -193,6 +194,6 @@ public class Person implements Comparable<Person> {
                 nationality + "," +
                 location.x() + "," +
                 location.y() + "," +
-                location.name();
+                location.name().replace(",", "\\,");
     }
 }
