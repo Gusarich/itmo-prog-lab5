@@ -47,9 +47,12 @@ public class InsertCommand implements interfaces.ICommand {
         output.print("Enter the key: ");
         int key = Integer.parseInt(input.readLine());
 
-        Person person = Person.fromInput(input, output);
-
-        persons.put(key, person);
-        output.println("Element added.");
+        if (persons.containsKey(key)) {
+            output.println("Element with the specified key already exists.");
+        } else {
+            Person person = Person.fromInput(input, output);
+            persons.put(key, person);
+            output.println("Element added.");
+        }
     }
 }
